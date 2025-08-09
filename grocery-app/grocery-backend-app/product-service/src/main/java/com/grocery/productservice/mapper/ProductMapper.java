@@ -10,12 +10,13 @@ public class ProductMapper {
 
     public static ProductResponseDto productToProductResponseDto(Products products){
         ProductResponseDto responseDto = new ProductResponseDto();
-        responseDto.setProductId(products.getProductId());
+        responseDto.setProductId(products.getId());
         responseDto.setProductName(products.getProductName());
         responseDto.setProductCategory(products.getProductCategory());
+        responseDto.setProductDescription(products.getProductDescription());
         responseDto.setPrice(products.getPrice());
         responseDto.setBrandName(products.getBrandName());
-        responseDto.setProductImageUrl(products.getProductImageUrl());
+        responseDto.setProductPoster(products.getProductPoster());
         return responseDto;
     }
 
@@ -23,9 +24,10 @@ public class ProductMapper {
         Products newProduct = new Products();
         newProduct.setProductName(productSaveDto.getProductName());
         newProduct.setProductCategory(productSaveDto.getProductCategory());
+        newProduct.setProductDescription(productSaveDto.getProductDescription());
         newProduct.setPrice(productSaveDto.getPrice());
         newProduct.setBrandName(productSaveDto.getBrandName());
-        newProduct.setProductImageUrl(productSaveDto.getProductImageUrl());
+        newProduct.setProductPoster(productSaveDto.getProductPoster());
         return newProduct;
     }
 }

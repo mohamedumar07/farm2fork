@@ -34,4 +34,25 @@ public class GlobalExceptionHandler {
         errors.put("message", ex.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(EmptyFileException.class)
+    public ResponseEntity<Map<String, String>> handleEmptyFileException(EmptyFileException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FileAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleFileAlreadyExistsException(FileAlreadyExistsException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(InvalidSortException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidSortException(InvalidSortException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
 }

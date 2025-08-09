@@ -17,9 +17,13 @@ public class ProductResponseDto {
 
     private String productCategory;
 
+    private String productDescription;
+
     private double price;
 
-    private String productImageUrl;
-
     private String brandName;
+
+    private String productPoster;
+
+    private String productImageUrl;
 }
