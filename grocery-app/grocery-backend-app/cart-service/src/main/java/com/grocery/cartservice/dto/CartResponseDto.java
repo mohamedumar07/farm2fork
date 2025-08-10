@@ -1,7 +1,6 @@
 package com.grocery.cartservice.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CartResponseDto {
 
-    private String cartId;
-    private String productId;
+    private long cartId;
+    private long productId;
     private String productName;
-    private int quantity;
+    private String productCategory;
+    private String productDescription;
+    private String brandName;
+    private long quantity;
     private double totalPrice;
+    private String productPoster;
 
 }

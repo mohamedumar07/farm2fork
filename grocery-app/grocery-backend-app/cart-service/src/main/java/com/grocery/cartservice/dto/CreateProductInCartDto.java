@@ -16,4 +16,6 @@ public class CreateProductInCartDto {
     @NotNull(message = "Product Id Required")
     private long productId;
 
+    private long quantity;
+
 }
