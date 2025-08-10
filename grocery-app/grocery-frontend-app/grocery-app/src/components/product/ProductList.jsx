@@ -3,10 +3,14 @@ import { getAllProducts } from '../../services/ProductService';
 import '../../css/productlist.css';
 import { useNavigate } from 'react-router-dom';
 import { addToWishlist, fetchWishlistByUser } from '../../services/WishlistService';
+import { addProductToCart } from '../../services/CartService';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductList = () => {
 
     const [products, setProducts] = useState([]);
+
+    const [quantities, setQuantities] = useState({});
 
     const navigator = useNavigate();
 
@@ -28,21 +32,59 @@ const ProductList = () => {
 
     const userId = 1;
 
-    function addWishlistItem(productId){
-    const wishlist = {
-        userId: 1,
-        productId: productId
-     };
+    function addWishlistItem(productId) {
+        const wishlist = {
+            userId: 1,
+            productId: productId
+        };
         addToWishlist(wishlist)
-          .then((response) => {
-             alert("Product Added to the Wishlist");
-             navigator("/");
-          })
-          .catch((error)=> {
-            alert("Error adding the product in the Wishlist");
-            console.error(error);
-          })
-     }
+            .then((response) => {
+                alert("Product Added to the Wishlist");
+                navigator("/");
+            })
+            .catch((error) => {
+                if (error.response && error.response.status === 409) {
+                toast.error("This product is already in the Wishlist");
+                alert("This product is already in your wishlist.");
+            } else {
+                console.error("Failed to add to wishlist", error);
+                alert("Failed to add to wishlist. Please try again.");
+            }
+            })
+    }
+
+    //function add to cart
+ 
+    function handleQuantityChange(productId, qty) {
+    setQuantities((prev) => ({
+        ...prev,
+        [productId]: qty,
+    }));
+   }
+
+function addToCart(productId) {
+    const quantity = quantities[productId] || 1;
+
+    const cartItem = {
+        userId: 1, // or dynamically from login
+        productId: productId,
+        quantity: quantity,
+    };
+
+    addProductToCart(cartItem)
+        .then((response) => {
+            alert("Product added to cart!");
+        })
+        .catch((error) => {
+            if (error.response && error.response.status === 409) {
+                toast.error("This product is already in your cart.");
+                alert("This product is already in your cart.");
+            } else {
+                console.error("Failed to add to cart", error);
+                alert("Failed to add to cart. Please try again.");
+            }
+        });
+}
 
     // useEffect(() => {
     //     setProducts([
@@ -100,17 +142,25 @@ const ProductList = () => {
                                     <p><strong>Decription: </strong> {product.productDescription}</p>
                                     <p className="price">Rs.{product.price.toFixed(2)}</p>
                                     <div className="product-actions">
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            defaultValue={1}
+                                            onChange={(e) => handleQuantityChange(product.productId, parseInt(e.target.value))}
+                                            style={{width:'60px'}}
+                                        />
                                         <button
                                             className="btn btn-success"
+                                            onClick={() => addToCart(product.productId)}
                                         >
-                                            Add to Cart
+                                            Add To Cart
                                         </button>
                                         <button
                                             className="btn btn-outline-danger"
                                             onClick={() => addWishlistItem(product.productId)}
 
                                         >
-                                            Wishlist
+                                            Wish
                                         </button>
                                     </div>
                                 </div>

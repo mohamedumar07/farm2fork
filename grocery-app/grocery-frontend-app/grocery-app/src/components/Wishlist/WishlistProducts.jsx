@@ -1,5 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import { deleteWishlist, fetchWishlistByUser } from '../../services/WishlistService';
+import 'react-toastify/dist/ReactToastify.css';
+import { addProductToCart } from '../../services/CartService';
 
 const WishlistProducts = () => {
 
@@ -30,6 +32,30 @@ const WishlistProducts = () => {
      })
   }
 
+  function addToCart(productId) {
+      const quantity = 1;
+  
+      const cartItem = {
+          userId: 1,
+          productId: productId,
+          quantity: quantity,
+      };
+  
+      addProductToCart(cartItem)
+          .then((response) => {
+              alert("Product added to cart!");
+          })
+          .catch((error) => {
+              if (error.response && error.response.status === 409) {
+                toast.error("This product is already in your cart.");
+                alert("This product is already in the cart.");
+            } else {
+                console.error("Failed to add to cart", error);
+                alert("Failed to add to cart. Please try again.");
+            }
+          });
+  }
+
   return (
      <div>
             <div className="product-list">
@@ -49,6 +75,7 @@ const WishlistProducts = () => {
                                     <div className="product-actions">
                                         <button
                                             className="btn btn-success"
+                                            onClick={() => addToCart(wishlistItem.productId)}
                                         >
                                             Add to Cart
                                         </button>

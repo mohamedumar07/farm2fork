@@ -12,6 +12,11 @@ const Header = () => {
       </div>
 
       <div className="header-right">
+
+         <a href="/cart" className="btn btn-info text-dark">
+          Cart
+        </a>
+
         <a href="/wishlist" className="btn btn-info text-dark">
           Wishlist
         </a>

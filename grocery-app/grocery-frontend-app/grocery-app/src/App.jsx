@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ProductList from './components/product/ProductList';
 import CreateProduct from './components/product/CreateProduct';
 import WishlistProducts from './components/Wishlist/WishlistProducts';
+import CartProducts from './components/cart/CartProducts';
 
 function App() {
 
@@ -23,6 +24,8 @@ function App() {
               <Route path='/add-product' element={<CreateProduct />}></Route>
 
               <Route path='/wishlist' element={<WishlistProducts />}></Route>
+
+              <Route path='/cart' element={<CartProducts />}></Route>
           
           </Routes>
         <Footer/>

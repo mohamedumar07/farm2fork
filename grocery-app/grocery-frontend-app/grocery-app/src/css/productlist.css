@@ -58,12 +58,13 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+  width: 100%;
 }
 
 .product-actions .btn {
-  flex: 1;
-  margin: 0 5px;
-  font-size: 0.9rem;
-  padding: 0.5rem;
+  flex: 2;
+  margin: 0 2px;
   border-radius: 5px;
+  padding: -10px;
+  width: 25px;
 }
