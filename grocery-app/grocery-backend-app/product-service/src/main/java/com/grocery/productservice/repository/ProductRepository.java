@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Products, Long> {
 
-    Optional<Products> findProductsByProductIdAndProductName(Long productId, @NotBlank(message = "Product Name is Required.") String productName);
+    Optional<Products> findProductsByIdAndProductName(Long productId, @NotBlank(message = "Product Name is Required.") String productName);
 
-    Products findProductsByProductName(String productName);
+    Optional<Products> findProductsByProductName(String productName);
 
     List<Products> findAllByOrderByPriceAsc();
 
@@ -48,4 +48,6 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
     List<Products> findAllByOrderByBrandNameAsc();
 
     List<Products> findAllByOrderByBrandNameDesc();
+
+    List<Products> findAllByBrandName(String brand);
 }
