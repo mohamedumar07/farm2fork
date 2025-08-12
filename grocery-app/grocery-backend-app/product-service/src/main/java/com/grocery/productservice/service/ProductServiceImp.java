@@ -209,7 +209,7 @@ public class ProductServiceImp implements ProductService {
             return productResponseDtosByDesc;
         }
         else{
-            throw new RuntimeException("Invalid sort order");
+            throw new InvalidSortException("Invalid sort order");
         }
     }
 
@@ -230,7 +230,7 @@ public class ProductServiceImp implements ProductService {
     public List<String> getAllCategories() {
         List<String> allCategories = productRepository.getAllProductCategories();
 
-        logger.info("Getting the list of all products categories", allCategories.stream().toList());
+        logger.info("Getting the list of all products categories: {}", allCategories);
 
         return allCategories;
     }
@@ -302,7 +302,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public List<ProductResponseDto> getProductsByBrand(String brand) {
-        List<Products> productsListByBrand = productRepository.findAllByProductCategory(brand);
+        List<Products> productsListByBrand = productRepository.findAllByBrandName(brand);
         List<ProductResponseDto> productResponseDtosByBrand = new ArrayList<>();
         for (Products products : productsListByBrand) {
             String productImageUrl = baseUrl + "/api/v1/file/"+products.getProductPoster();

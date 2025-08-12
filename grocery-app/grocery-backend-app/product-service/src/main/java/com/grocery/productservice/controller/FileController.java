@@ -1,7 +1,6 @@
 package com.grocery.productservice.controller;
 
 import com.grocery.productservice.service.FileService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -30,6 +29,7 @@ public class FileController {
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("Uploading to: " + filePath);
         String uploadFileName = fileService.uploadFile(filePath,file);
         return new ResponseEntity<>(uploadFileName, HttpStatus.OK);
     }
@@ -37,6 +37,7 @@ public class FileController {
     @GetMapping("/{fileName}")
     public void getFile(@PathVariable("fileName") String fileName,
                                      HttpServletResponse response) throws IOException {
+        System.out.println("Retrieving from: " + filePath);
         InputStream resourceFile = fileService.getResourceFile(filePath,fileName);
         response.setContentType(MediaType.IMAGE_PNG_VALUE);
         StreamUtils.copy(resourceFile,response.getOutputStream());
