@@ -13,6 +13,10 @@ const Header = () => {
 
       <div className="header-right">
 
+        <a href="/inventory" className="btn btn-info text-dark">
+          Inventory
+        </a>
+
          <a href="/cart" className="btn btn-info text-dark">
           Cart
         </a>

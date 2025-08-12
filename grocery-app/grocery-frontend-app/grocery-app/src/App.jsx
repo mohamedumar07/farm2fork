@@ -8,6 +8,8 @@ import ProductList from './components/product/ProductList';
 import CreateProduct from './components/product/CreateProduct';
 import WishlistProducts from './components/Wishlist/WishlistProducts';
 import CartProducts from './components/cart/CartProducts';
+import ProductInventory from './components/inventory/ProductInventory';
+import InventoryComp from './components/inventory/InventoryComp';
 
 function App() {
 
@@ -26,6 +28,10 @@ function App() {
               <Route path='/wishlist' element={<WishlistProducts />}></Route>
 
               <Route path='/cart' element={<CartProducts />}></Route>
+
+              <Route path='/inventory' element={<ProductInventory />}></Route>
+
+              <Route path='/add-inventory' element={<InventoryComp />}></Route>
           
           </Routes>
         <Footer/>

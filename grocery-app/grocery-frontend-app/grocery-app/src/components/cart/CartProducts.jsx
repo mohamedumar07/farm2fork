@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
-    const userId = 1; // replace with logged in user logic
+    const userId = 1;
     const [cartItems, setCartItems] = useState([]);
 
 
